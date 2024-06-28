@@ -3,29 +3,37 @@ require "csv"
 puts "じゃんけん..."
 def janken_method
     puts "0(グー),1(チョキ),2(パー)"
-    my_hand = gets.to_i
-    his_hand = rand(3)
-    janken = ["グー","チョキ","パー"]
-    puts "ぽい！"
-    puts "--------------"
-    puts "あなた:#{janken[my_hand]}を出しました"
-    puts "相手:#{janken[his_hand]}を出しました"
+    my_hand_str = gets.chomp
+    my_hand = my_hand_str.to_i
+    case my_hand
+    when 0, 1, 2 
+        his_hand = rand(3)
+        janken = ["グー","チョキ","パー"]
+        puts "ぽい！"
+        puts "--------------"
+        puts "あなた:#{janken[my_hand]}を出しました"
+        puts "相手:#{janken[his_hand]}を出しました"
 
-    if (my_hand == 0 && his_hand == 1)||
-        (my_hand == 1 && his_hand == 2)||
-        (my_hand == 2 && his_hand == 0)
-        puts "勝ちました！"
-        puts "--------------"
-        return "you_win"
-    elsif (my_hand == his_hand)
-        puts "あいこです！もう一度！"
-        puts "--------------"
-        puts "あいこで..."
-        return "draw"
+        if (my_hand == 0 && his_hand == 1)||
+            (my_hand == 1 && his_hand == 2)||
+            (my_hand == 2 && his_hand == 0)
+            puts "勝ちました！"
+            puts "--------------"
+            return "you_win"
+        elsif (my_hand == his_hand)
+            puts "あいこです！もう一度！"
+            puts "--------------"
+            puts "あいこで..."
+            return "draw"
+        else 
+            puts "負けました。"
+            puts "--------------"
+            return "you_lose"
+        end
     else 
-        puts "負けました。"
-        puts "--------------"
-        return "you_lose"
+        puts "-------------"
+        puts "０〜２の数字を入力してください"
+        janken_method
     end
 end
 
@@ -33,14 +41,21 @@ def atti_method
     puts "あっち向いて..."
     puts "0(上↑), 1(下↓), 2(右→), 3(左←)"
     my_face = gets.to_i
-    his_finger = rand(4)
-    direction = ["上", "下", "右", "左"]
-    puts "ほい！"
-    puts "------------"
-    puts "あなた:#{direction[my_face]}"
-    puts "相手:#{direction[his_finger]}"
-    puts "------------"
-    return my_face, his_finger
+    case my_face
+    when 0, 1, 2, 3
+        his_finger = rand(4)
+        direction = ["上", "下", "右", "左"]
+        puts "ほい！"
+        puts "------------"
+        puts "あなた:#{direction[my_face]}"
+        puts "相手:#{direction[his_finger]}"
+        puts "------------"
+        return my_face, his_finger
+    else
+        puts "------------"
+        puts "０〜３の数字を入力してください"
+        atti_method
+    end
 end
 
 loop do
